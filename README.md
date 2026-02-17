@@ -9,7 +9,7 @@ App::Greple::md - Greple module for Markdown syntax highlighting
 
     greple -Mmd::config(mode=dark) file.md
 
-    greple -Mmd --cm h1=RD file.md
+    greple -Mmd --cm h1=RD -- file.md
 
 # DESCRIPTION
 
@@ -23,28 +23,29 @@ state machine, inline code protection, HTML comment protection, links
 with OSC 8 hyperlinks, headings (cumulative), emphasis (bold, italic,
 strikethrough), blockquotes, and horizontal rules.
 
-Default colors can be overridden by `--cm LABEL=spec` on the command
-line.  The module intercepts `--cm` options for its own labels before
-greple processes them.
+Default colors can be overridden by `--cm LABEL=spec` as a module
+option (before `--`).  Color specs follow
+[Term::ANSIColor::Concise](https://metacpan.org/pod/Term%3A%3AANSIColor%3A%3AConcise) format and support `sub{...}` function
+specs via [Getopt::EX::Colormap](https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AColormap).
 
 ## Color Labels
 
 The following color labels are available for override:
 
-    code_fence      Fenced code block opening/closing fence
-    code_lang       Fenced code block language specifier
-    code_body       Fenced code block body
-    inline_code     Inline code spans
-    comment         HTML comments
-    link            Inline links [text](url)
-    image           Images ![alt](url)
-    image_link      Image links [![alt](img)](url)
-    h1 - h6         Headings
-    bold            Bold text (**text** or __text__)
-    italic          Italic text (*text* or _text_)
-    strike          Strikethrough text (~~text~~)
-    blockquote      Blockquote marker (>)
-    horizontal_rule Horizontal rules (---, ***, ___)
+    code_mark        Code delimiters (fences and backticks)
+    code_info        Fenced code block info string
+    code_block       Fenced code block body
+    code_inline      Inline code body
+    comment          HTML comments
+    link             Inline links [text](url)
+    image            Images ![alt](url)
+    image_link       Image links [![alt](img)](url)
+    h1 - h6          Headings
+    bold             Bold text (**text** or __text__)
+    italic           Italic text (*text* or _text_)
+    strike           Strikethrough text (~~text~~)
+    blockquote       Blockquote marker (>)
+    horizontal_rule  Horizontal rules (---, ***, ___)
 
 ## Dark Mode
 
@@ -59,13 +60,24 @@ clickable URLs in supported terminals.  Disable with `osc8=0`:
 
     greple -Mmd::config(osc8=0) file.md
 
+## Field Visibility
+
+The `--show` option controls which elements are highlighted:
+
+    greple -Mmd --show bold=0 -- file.md       # disable bold
+    greple -Mmd --show all= --show h1 -- file.md  # only h1
+
+`--show LABEL=0` or `--show LABEL=` disables the label.
+`--show LABEL` or `--show LABEL=1` enables it.
+`all` is a special key that sets all labels at once.
+
 # SEE ALSO
 
 [App::Greple](https://metacpan.org/pod/App%3A%3AGreple)
 
-[Getopt::EX::Config](https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AConfig)
+[Getopt::EX::Colormap](https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AColormap)
 
-[Term::ANSIColor::Concise](https://metacpan.org/pod/Term%3A%3AANSIColor%3A%3AConcise)
+[Getopt::EX::Config](https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AConfig)
 
 # AUTHOR
 

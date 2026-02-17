@@ -1,7 +1,7 @@
 requires 'perl', '5.024';
 
-requires 'App::Greple', '9.23';
-requires 'Getopt::EX::Config';
+requires 'App::Greple', '10.03';
+requires 'Getopt::EX::Config', '1.0202';
 requires 'URI::Escape';
 
 on 'test' => sub {

@@ -42,8 +42,8 @@
       },
       "runtime" : {
          "requires" : {
-            "App::Greple" : "9.23",
-            "Getopt::EX::Config" : "0",
+            "App::Greple" : "10.03",
+            "Getopt::EX::Config" : "1.0202",
             "URI::Escape" : "0",
             "perl" : "5.024"
          }

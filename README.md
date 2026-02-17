@@ -7,7 +7,9 @@ App::Greple::md - Greple module for Markdown syntax highlighting
 
     greple -Mmd file.md
 
-    greple -Mmd::config(mode=dark) file.md
+    greple -Mmd --mode=dark -- file.md
+
+    greple -Mmd --hashed h3=1 -- file.md
 
     greple -Mmd --cm h1=RD -- file.md
 
@@ -49,9 +51,21 @@ The following color labels are available for override:
 
 ## Dark Mode
 
-Use `mode=dark` configuration to activate dark mode colors:
+Use `--mode=dark` or `config(mode=dark)` to activate dark mode colors:
+
+    greple -Mmd --mode=dark -- file.md
 
     greple -Mmd::config(mode=dark) file.md
+
+## Closing Hashes
+
+The `hashed` configuration adds closing hashes to headings
+(e.g., `### Title` becomes `### Title ###`).  It is a hash
+option that can be set per heading level:
+
+    greple -Mmd::config(hashed.h3=1,hashed.h4=1,hashed.h5=1,hashed.h6=1) file.md
+
+    greple -Mmd --hashed h3=1 --hashed h4=1 -- file.md
 
 ## OSC 8 Hyperlinks
 

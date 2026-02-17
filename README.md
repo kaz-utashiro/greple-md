@@ -82,6 +82,15 @@ Nested hash parameters use dot notation:
 
     greple -Mmd::config(hashed.h3=1,hashed.h4=1) file.md
 
+## Table Formatting
+
+By default, Markdown tables are formatted with aligned columns using
+[App::ansicolumn](https://metacpan.org/pod/App%3A%3Aansicolumn) and separator lines are converted to Unicode
+box-drawing characters.  Control with `table` and `rule` parameters:
+
+    greple -Mmd::config(table=0) file.md    # disable table formatting
+    greple -Mmd::config(rule=0) file.md     # disable box-drawing characters
+
 ## OSC 8 Hyperlinks
 
 By default, links are converted to OSC 8 terminal hyperlinks for

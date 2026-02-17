@@ -43,6 +43,8 @@
       "runtime" : {
          "requires" : {
             "App::Greple" : "10.03",
+            "App::ansicolumn" : "0",
+            "Command::Run" : "0",
             "Getopt::EX::Config" : "1.0202",
             "URI::Escape" : "0",
             "perl" : "5.024"

@@ -25,6 +25,6 @@ jobs:
       - uses: shogo82148/actions-setup-perl@v1
         with:
           perl-version: ${{ matrix.perl }}
-      - run: cpanm -nq --installdeps --with-develop --with-recommends .
+      - run: cpanm -nq --metacpan --installdeps --with-develop --with-recommends .
       - run: prove -lr t
 

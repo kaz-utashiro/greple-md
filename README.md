@@ -189,6 +189,8 @@ Available parameters:
     osc8            OSC 8 hyperlinks (default: 1)
     heading_markup  inline markup in headings (default: 0)
                     0=off, 1/all=all, or colon-separated steps
+    tick_open       inline code open marker (default: `)
+    tick_close      inline code close marker (default: ´)
     hashed.h1-h6    closing hashes per level (default: 0)
 
 ## OSC 8 Hyperlinks
@@ -231,6 +233,12 @@ Colors follow [Term::ANSIColor::Concise](https://metacpan.org/pod/Term%3A%3AANSI
     code_info    ${base_name}=y70   L10
     code_block   /L23;E             /L05;E
     code_inline  L00/L23            L25/L05
+
+Inline code backticks are displayed as `` `content´ `` using
+`code_tick` color.  Multi-backtick delimiters are collapsed to a
+single pair with optional surrounding spaces stripped (per CommonMark).
+The open/close markers can be customized via `tick_open`/`tick_close`
+config parameters.
 
 ## Block Elements
 

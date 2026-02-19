@@ -15,6 +15,8 @@ App::Greple::md - Greple module for Markdown syntax highlighting
 
     greple -Mmd --no-table -- file.md
 
+    greple -Mmd --fold file.md
+
 # DESCRIPTION
 
 **App::Greple::md** is a [greple](https://metacpan.org/pod/App%3A%3AGreple) module for viewing
@@ -23,8 +25,9 @@ Markdown files in the terminal with syntax highlighting.
 It colorizes headings, bold, italic, strikethrough, inline code,
 fenced code blocks, HTML comments, blockquotes, horizontal rules,
 links, and images.  Tables are formatted with aligned columns and
-optional Unicode box-drawing borders.  Links become clickable via
-OSC 8 terminal hyperlinks in supported terminals.
+optional Unicode box-drawing borders.  Long lines in list items can
+be folded with proper indentation.  Links become clickable via OSC 8
+terminal hyperlinks in supported terminals.
 
 Nested elements are handled with cumulative coloring: for example,
 a link inside a heading retains both its link color and the heading
@@ -33,6 +36,24 @@ background color.
 For a complete Markdown viewing experience with line folding,
 multi-column output, and themes, see [App::mdee](https://metacpan.org/pod/App%3A%3Amdee), which uses this
 module as its highlighting engine.
+
+# COMMAND OPTIONS
+
+The following options are defined as greple command options
+(specified after `--`).
+
+## **--fold**
+
+Enable text folding for list items and definition lists.  Long lines
+are wrapped with proper indentation using [ansifold(1)](https://metacpan.org/pod/App%3A%3Aansifold)
+via [Greple::tee](https://metacpan.org/pod/Greple%3A%3Atee).  Code blocks, HTML comments, and tables are
+excluded from folding.  The fold width is controlled by the
+`foldwidth` config parameter (default: 80).
+
+    greple -Mmd --fold file.md
+    greple -Mmd::config(foldwidth=60) -- --fold file.md
+
+Supported list markers: `*`, `-`, `1.`, `1)`, `#.`, `#)`.
 
 # MODULE OPTIONS
 
@@ -136,6 +157,7 @@ Available parameters:
 
     mode            light or dark (default: light)
     base_color      base color override
+    foldwidth       fold width in columns (default: 80)
     table           table formatting (default: 1)
     rule            box-drawing characters (default: 1)
     osc8            OSC 8 hyperlinks (default: 1)
@@ -216,6 +238,10 @@ Colors follow [Term::ANSIColor::Concise](https://metacpan.org/pod/Term%3A%3AANSI
 - [App::ansicolumn](https://metacpan.org/pod/App%3A%3Aansicolumn)
 
     ANSI-aware column formatting used for table alignment.
+
+- [App::ansifold](https://metacpan.org/pod/App%3A%3Aansifold)
+
+    ANSI-aware text folding used for line wrapping in list items.
 
 # AUTHOR
 

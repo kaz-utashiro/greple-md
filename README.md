@@ -73,7 +73,7 @@ horizontal rules (`─`) with corner pieces (`├`,
 
     greple -Mmd --no-rule -- file.md
 
-## **--cm** _LABEL_=_SPEC_
+## **--colormap** _LABEL_=_SPEC_, **--cm** _LABEL_=_SPEC_
 
 Override the color for a specific element.  _LABEL_ is one of
 the color labels listed in ["COLOR LABELS"](#color-labels).  _SPEC_ follows
@@ -82,6 +82,17 @@ function specs via [Getopt::EX::Colormap](https://metacpan.org/pod/Getopt%3A%3AE
 
     greple -Mmd --cm h1=RD -- file.md
     greple -Mmd --cm bold='${base}D' -- file.md
+
+## **--heading-markup**, **--hm**
+
+Enable inline markup processing inside headings.  By default,
+headings are rendered with uniform heading color without processing
+bold, italic, strikethrough, or inline code inside them.  Links
+are always processed as OSC 8 hyperlinks regardless of this option.
+With this option, all inline formatting becomes visible within
+headings using cumulative coloring.
+
+    greple -Mmd --hm -- file.md
 
 ## **--hashed** _LEVEL_=_VALUE_
 
@@ -133,37 +144,48 @@ Disable with:
 # COLOR LABELS
 
 The following labels identify colorizable elements.  Use them
-with `--cm` to customize colors or `--show` to control
-visibility.
-
-## Code
-
-    code_mark        Code delimiters (fences and backticks)
-    code_info        Fenced code block info string (language name)
-    code_block       Fenced code block body
-    code_inline      Inline code body
+with `--colormap` (`--cm`) to customize colors or `--show` to control
+visibility.  Default values are shown as `light / dark`.
+Colors follow [Term::ANSIColor::Concise](https://metacpan.org/pod/Term%3A%3AANSIColor%3A%3AConcise) format.
 
 ## Headings
 
-    h1 - h6          Heading levels 1 through 6
+    LABEL   LIGHT                    DARK
+    h1      L25D/${base};E           L00D/${base};E
+    h2      L25D/${base}+y20;E       L00D/${base}-y15;E
+    h3      L25DN/${base}+y30        L00DN/${base}-y25
+    h4      ${base}UD                ${base}UD
+    h5      ${base}+y20;U            ${base}-y20;U
+    h6      ${base}+y20              ${base}-y20
 
 ## Inline Formatting
 
-    bold             Bold (**text** or __text__)
-    italic           Italic (*text* or _text_)
-    strike           Strikethrough (~~text~~)
+    LABEL   LIGHT / DARK
+    bold    D
+    italic  I
+    strike  X
+
+## Code
+
+    LABEL        LIGHT              DARK
+    code_mark    L20                L10
+    code_info    ${base_name}=y70   ${base_name}=y20
+    code_block   /L23;E             /L05;E
+    code_inline  L00/L23            L25/L05
 
 ## Block Elements
 
-    blockquote       Blockquote marker (>)
-    horizontal_rule  Horizontal rules (---, ***, ___)
-    comment          HTML comments (<!-- ... -->)
+    LABEL            LIGHT / DARK
+    blockquote       ${base}D
+    horizontal_rule  L15
+    comment          ${base}+r60
 
 ## Links
 
-    link             Inline links [text](url)
-    image            Images ![alt](url)
-    image_link       Image links [![alt](img)](url)
+    LABEL        LIGHT / DARK
+    link         I
+    image        I
+    image_link   I
 
 # SEE ALSO
 

@@ -15,7 +15,9 @@ App::Greple::md - Greple module for Markdown syntax highlighting
 
     greple -Mmd --no-table -- file.md
 
-    greple -Mmd --fold file.md
+    greple -Mmd --foldlist -- file.md
+
+    greple -Mmd -- --fold file.md
 
 # DESCRIPTION
 
@@ -50,10 +52,13 @@ via [Greple::tee](https://metacpan.org/pod/Greple%3A%3Atee).  Code blocks, HTML 
 excluded from folding.  The fold width is controlled by the
 `foldwidth` config parameter (default: 80).
 
-    greple -Mmd --fold file.md
+    greple -Mmd -- --fold file.md
     greple -Mmd::config(foldwidth=60) -- --fold file.md
 
 Supported list markers: `*`, `-`, `1.`, `1)`, `#.`, `#)`.
+
+The module option `--foldlist` is a convenient alternative that
+enables folding via config.
 
 # MODULE OPTIONS
 
@@ -75,6 +80,25 @@ elements.  Accepts a named color (e.g., `Crimson`, `DarkCyan`) or a
 [Term::ANSIColor::Concise](https://metacpan.org/pod/Term%3A%3AANSIColor%3A%3AConcise) color spec.
 
     greple -Mmd -B Crimson -- file.md
+
+## **--\[no-\]colorize**
+
+Enable or disable syntax highlighting.  Enabled by default.
+When disabled, no color is applied to Markdown elements.
+
+    greple -Mmd --no-colorize -- file.md
+
+## **--\[no-\]foldlist**
+
+Enable or disable text folding.  Disabled by default.  When
+enabled, long lines in list items and definition lists are wrapped
+with proper indentation.  The fold width is controlled by the
+`foldwidth` config parameter (default: 80).
+
+    greple -Mmd --foldlist -- file.md
+    greple -Mmd::config(foldlist=1,foldwidth=60) file.md
+
+See also the `--fold` command option.
 
 ## **--\[no-\]table**
 
@@ -157,6 +181,8 @@ Available parameters:
 
     mode            light or dark (default: light)
     base_color      base color override
+    colorize        syntax highlighting (default: 1)
+    foldlist        text folding (default: 0)
     foldwidth       fold width in columns (default: 80)
     table           table formatting (default: 1)
     rule            box-drawing characters (default: 1)

@@ -228,7 +228,7 @@ Colors follow [Term::ANSIColor::Concise](https://metacpan.org/pod/Term%3A%3AANSI
     LABEL        LIGHT              DARK
     code_mark    L20                L10
     code_tick    L15/L23            L15/L05
-    code_info    ${base_name}=y70   ${base_name}=y40
+    code_info    ${base_name}=y70   L10
     code_block   /L23;E             /L05;E
     code_inline  L00/L23            L25/L05
 

@@ -83,16 +83,24 @@ function specs via [Getopt::EX::Colormap](https://metacpan.org/pod/Getopt%3A%3AE
     greple -Mmd --cm h1=RD -- file.md
     greple -Mmd --cm bold='${base}D' -- file.md
 
-## **--heading-markup**, **--hm**
+## **--heading-markup**\[=_STEPS_\], **--hm**\[=_STEPS_\]
 
-Enable inline markup processing inside headings.  By default,
+Control inline markup processing inside headings.  By default,
 headings are rendered with uniform heading color without processing
 bold, italic, strikethrough, or inline code inside them.  Links
 are always processed as OSC 8 hyperlinks regardless of this option.
-With this option, all inline formatting becomes visible within
-headings using cumulative coloring.
 
-    greple -Mmd --hm -- file.md
+Without an argument, all inline formatting becomes visible within
+headings using cumulative coloring.  With an argument, only the
+specified steps are processed inside headings.  Steps are separated
+by colons.
+
+Available steps: `inline_code`, `horizontal_rules`, `bold`,
+`italic`, `strike`.
+
+    greple -Mmd --hm -- file.md                  # all markup
+    greple -Mmd --hm=bold -- file.md              # bold only
+    greple -Mmd --hm=bold:italic -- file.md       # bold and italic
 
 ## **--hashed** _LEVEL_=_VALUE_
 
@@ -126,12 +134,14 @@ Nested hash parameters use dot notation:
 
 Available parameters:
 
-    mode          light or dark (default: light)
-    base_color    base color override
-    table         table formatting (default: 1)
-    rule          box-drawing characters (default: 1)
-    osc8          OSC 8 hyperlinks (default: 1)
-    hashed.h1-h6  closing hashes per level (default: 0)
+    mode            light or dark (default: light)
+    base_color      base color override
+    table           table formatting (default: 1)
+    rule            box-drawing characters (default: 1)
+    osc8            OSC 8 hyperlinks (default: 1)
+    heading_markup  inline markup in headings (default: 0)
+                    0=off, 1/all=all, or colon-separated steps
+    hashed.h1-h6    closing hashes per level (default: 0)
 
 ## OSC 8 Hyperlinks
 

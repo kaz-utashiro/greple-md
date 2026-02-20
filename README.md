@@ -166,6 +166,14 @@ focusing on specific elements or disabling unwanted highlighting.
 `--show LABEL` or `--show LABEL=1` enables it.
 `all` is a special key that sets all labels at once.
 
+Controllable labels: `bold`, `italic`, `strike`, `code_inline`,
+`header` (h1-h6), `horizontal_rule`, `blockquote`.
+
+The following elements are always processed and cannot be disabled:
+`comment`, `code_block` (`code_mark`, `code_info`),
+`link`, `image`, `image_link`.
+Use `--cm LABEL=` to remove their color without disabling processing.
+
 # CONFIGURATION
 
 Module parameters can also be set using the `config()` function
